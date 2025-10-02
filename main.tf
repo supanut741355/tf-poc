@@ -9,7 +9,7 @@ terraform {
 
 provider "google" {
   project = "myorder-beta"
-  region  = "asia-southeast1"
+  region  = "var.region"
   zone    = "asia-southeast1-a"
 }
 
@@ -34,5 +34,3 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 }
-
-
