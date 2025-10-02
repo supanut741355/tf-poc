@@ -38,13 +38,17 @@ provider "google" {
 module "gcs_copy" {
   source = "./modules/gcs-copy"
 
-  source_project     = "myorder-research-101"
-  source_bucket      = "tmp-model-ai"
-  source_subfolder   = "gliner_triton_server/30_09_2025"
-  source_credentials = "./modules/gcs-copy/credentails/myorder-research-101-246837526cba.json"
+  source_project     = "myorder-ai-lab-research"
+  source_bucket      = "poc-model-serving-asia"
+  source_subfolder   = "triton-onnx/2025-09-16"
+  source_credentials = "./modules/gcs-copy/credentails/myorder-ai-lab-research-a52ee0a1943a.json"
 
-  target_project     = "myorder-research-101"
-  target_bucket      = "tmp-model-ai-beta"
-  target_subfolder   = "gliner_triton_server"
-  target_credentials = "./modules/gcs-copy/credentails/myorder-beta-17d274fdd06f.json"
+  target_project     = "myorder-ai-model-serving"
+  target_bucket      = "poc-model-ai"
+  target_subfolder   = "gliner_triton_server/2025-09-16"
+  target_credentials = "./modules/gcs-copy/credentails/myorder-ai-model-serving-6b5d25e28b2b.json"
 }
+
+
+# gs://poc-model-serving-asia/triton-onnx/2025-09-16/
+# gs://poc-model-serving-asia/triton-onnx/2025_09_16/
