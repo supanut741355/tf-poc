@@ -40,12 +40,14 @@ module "gcs_copy" {
 
   source_project     = "myorder-ai-lab-research"
   source_bucket      = "poc-model-serving-asia"
-  source_subfolder   = "triton-onnx/2025-09-16"
+  # source_subfolder   = "triton-onnx/2025-09-16"
+  source_subfolder   = "triton-onnx/2025-10-02-tmp-2"
   source_credentials = "./modules/gcs-copy/credentails/myorder-ai-lab-research-a52ee0a1943a.json"
 
   target_project     = "myorder-ai-model-serving"
   target_bucket      = "poc-model-ai"
-  target_subfolder   = "gliner_triton_server/2025-09-16"
+  # target_subfolder   = "gliner_triton_server/2025-09-16"
+  target_subfolder   = "gliner_triton_server/2025-10-02-tmp-2"
   target_credentials = "./modules/gcs-copy/credentails/myorder-ai-model-serving-6b5d25e28b2b.json"
 }
 

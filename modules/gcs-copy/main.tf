@@ -13,6 +13,11 @@ provider "google" {
 }
 
 resource "null_resource" "copy_folder_files" {
+  triggers = {
+    source_subfolder = var.source_subfolder
+    target_subfolder = var.target_subfolder
+  }
+
   provisioner "local-exec" {
     command = <<EOT
       gsutil -m cp -r gs://${var.source_bucket}/${var.source_subfolder} gs://${var.target_bucket}/${var.target_subfolder}
