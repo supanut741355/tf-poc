@@ -54,3 +54,16 @@ module "gcs_copy" {
 
 # gs://poc-model-serving-asia/triton-onnx/2025-09-16/
 # gs://poc-model-serving-asia/triton-onnx/2025_09_16/
+
+module "triton_onnx_model" {
+  source = "./modules/vertex_ai_model"
+
+  region              = "asia-southeast1"
+  display_name        = "triton-onnx"
+  container_image_uri = "asia-docker.pkg.dev/my-project/artifacts/triton:latest"
+  artifact_uri        = "gs://my-model-storage/triton-onnx/"
+
+  # Optional overrides
+  container_ports        = [8080]
+  container_health_route = "/v2/health/ready"
+}
