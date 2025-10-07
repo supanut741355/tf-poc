@@ -1,8 +1,16 @@
 terraform {
   required_providers {
+    # google = {
+    #   source  = "hashicorp/google"
+    #   version = "6.8.0"
+    # }
     google = {
       source  = "hashicorp/google"
-      version = "6.8.0"
+      version = ">= 4.80.0, < 5.0.0"
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = ">= 4.80.0, < 5.0.0"
     }
   }
 }
@@ -55,15 +63,10 @@ module "gcs_copy" {
 # gs://poc-model-serving-asia/triton-onnx/2025-09-16/
 # gs://poc-model-serving-asia/triton-onnx/2025_09_16/
 
-module "triton_onnx_model" {
-  source = "./modules/vertex_ai_model"
-
+module "upload_model_to_verext" {
+  source = "./modules/google_vertex_ai_model"
   region              = "asia-southeast1"
-  display_name        = "triton-onnx"
-  container_image_uri = "asia-docker.pkg.dev/my-project/artifacts/triton:latest"
-  artifact_uri        = "gs://my-model-storage/triton-onnx/"
-
-  # Optional overrides
-  container_ports        = [8080]
-  container_health_route = "/v2/health/ready"
+  display_name        = "triton-onnx-poc-by-nutx"
+  container_image_uri = "asia-southeast1-docker.pkg.dev/myorder-ai-model-serving/triton-server/tritonserver:latest"
+  artifact_uri        = "gs://poc-model-ai/gliner_triton_server/2025-09-16"
 }

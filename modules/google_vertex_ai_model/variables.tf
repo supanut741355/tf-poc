@@ -41,12 +41,6 @@ variable "container_args" {
   type        = list(string)
   default     = [
     "-lc",
-    "exec tritonserver --model-repository=\"${AIP_STORAGE_URI}\" --vertex-ai-default-model=gliner --http-port=\"${AIP_HTTP_PORT:-8080}\" --strict-model-config=false --log-verbose=0"
+    "exec tritonserver --model-repository=\"$${AIP_STORAGE_URI}\" --vertex-ai-default-model=gliner --http-port=\"$${AIP_HTTP_PORT:-8080}\" --strict-model-config=false --log-verbose=0"
   ]
-}
-
-variable "labels" {
-  description = "Optional labels to attach to the model"
-  type        = map(string)
-  default     = {}
 }
