@@ -59,14 +59,16 @@ module "gcs_copy" {
   target_credentials = "./modules/gcs-copy/credentails/myorder-ai-model-serving-6b5d25e28b2b.json"
 }
 
-
-# gs://poc-model-serving-asia/triton-onnx/2025-09-16/
-# gs://poc-model-serving-asia/triton-onnx/2025_09_16/
-
-module "upload_model_to_verext" {
+module "upload_model_to_vertex" {
   source = "./modules/google_vertex_ai_model"
   region              = "asia-southeast1"
   display_name        = "triton-onnx-poc-by-nutx"
   container_image_uri = "asia-southeast1-docker.pkg.dev/myorder-ai-model-serving/triton-server/tritonserver:latest"
   artifact_uri        = "gs://poc-model-ai/gliner_triton_server/2025-09-16"
+}
+
+module "make_vertex_ai_endpoint" {
+  source       = "./modules/google_vertex_ai_endpoint"
+  region       = "asia-southeast1"
+  display_name = "triton-endpoint-poc-by-nutx"
 }
