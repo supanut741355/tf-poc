@@ -9,7 +9,8 @@ resource "null_resource" "upload_model_to_vertex" {
         --container-ports=${join(",", var.container_ports)} \
         --container-health-route=${var.container_health_route} \
         --container-command=${join(" ", var.container_command)} \
-        --container-args='[${join(",", [for a in var.container_args : "\"${a}\""])}]'
+        --container-args='${join(",", [for a in var.container_args : format("'%s'", replace(a, "$$", "$"))])}'
+
     EOT
 
     interpreter = ["/bin/bash", "-c"]

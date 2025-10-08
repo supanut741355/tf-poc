@@ -62,7 +62,7 @@ module "gcs_copy" {
 module "upload_model_to_vertex" {
   source = "./modules/google_vertex_ai_model"
   region              = "asia-southeast1"
-  display_name        = "triton-onnx-poc-by-nutx"
+  display_name        = "triton-onnx-poc-by-nutx2"
   container_image_uri = "asia-southeast1-docker.pkg.dev/myorder-ai-model-serving/triton-server/tritonserver:latest"
   artifact_uri        = "gs://poc-model-ai/gliner_triton_server/2025-09-16"
 }
@@ -71,4 +71,18 @@ module "make_vertex_ai_endpoint" {
   source       = "./modules/google_vertex_ai_endpoint"
   region       = "asia-southeast1"
   display_name = "triton-endpoint-poc-by-nutx"
+}
+
+module "deploy_vertext_ai_model" {
+  source             = "./modules/google_vertext_ai_endpoint_deploy_model"
+  endpoint_id        = "9222769504482754560" # endpoint ที่สร้างไว้
+  region             = "asia-southeast1"
+  model_id           = "1846568206198636544"
+  display_name       = "triton-poc-by-nutx-v1"
+  traffic_split      = "0=100"
+  machine_type       = "g2-standard-4"
+  accelerator_type   = "nvidia-l4"
+  accelerator_count  = 1
+  max_replica_count  = 4
+  min_replica_count  = 1
 }
